@@ -1,66 +1,84 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta charset="UTF-8">
-<title>Καταχώρηση Μελών</title>
-<style>
-  body { font-family: Arial; background: #f4f4f4; padding: 20px; }
-  form { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-  input, textarea, select, button { width: 100%; padding: 10px; margin: 5px 0 15px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-  button { background: #28a745; color: #fff; border: none; cursor: pointer; font-size: 16px; }
-  button:hover { background: #218838; }
-</style>
+  <meta charset="UTF-8">
+  <title>Φόρμα Μελών</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+    label { display: block; margin-top: 10px; }
+    input, select, textarea { width: 100%; padding: 5px; margin-top: 2px; }
+    button { margin-top: 15px; padding: 10px 20px; }
+  </style>
 </head>
 <body>
 
-<h2 style="text-align:center;">Φόρμα Καταχώρησης Μελών</h2>
+  <h1>Καταχώρηση Μελών</h1>
+  <form id="memberForm">
+    <label>Επίθετο <input type="text" id="Επίθετο" required></label>
+    <label>Όνομα <input type="text" id="Όνομα" required></label>
+    <label>Πατρός <input type="text" id="Πατρός"></label>
+    <label>Τηλέφωνο <input type="text" id="Τηλέφωνο"></label>
+    <label>Email <input type="email" id="Email"></label>
+    <label>Διεύθυνση <input type="text" id="Διεύθυνση"></label>
+    <label>Πόλη <input type="text" id="Πόλη"></label>
+    <label>Νομός <input type="text" id="Νομός"></label>
+    <label>Επάγγελμα <input type="text" id="Επάγγελμα"></label>
+    <label>Χώρος Εργασίας <input type="text" id="Χώρος_Εργασίας"></label>
+    <label>Ημερομηνία Γέννησης <input type="date" id="Ημερομηνία_Γέννησης"></label>
+    <label>Οικογενειακή Κατάσταση <input type="text" id="Οικογενειακή_Κατασταση"></label>
+    <label>Τέκνα <input type="text" id="Τέκνα"></label>
+    <label>ΑΜΚΑ <input type="text" id="AMKA"></label>
+    <label>ΑΦΜ <input type="text" id="ΑΦΜ"></label>
+    <label>ΑΔΤ <input type="text" id="ΑΔΤ"></label>
+    <label>Έκδοση <input type="text" id="Εκδοση"></label>
+    <label>Παρατηρήσεις <textarea id="Παρατηρήσεις"></textarea></label>
+    <button type="submit">Καταχώρηση</button>
+  </form>
 
-<form id="memberForm">
-  <input type="text" name="Επίθετο" placeholder="Επίθετο" required>
-  <input type="text" name="Όνομα" placeholder="Όνομα" required>
-  <input type="text" name="Πατρός" placeholder="Πατρός">
-  <input type="text" name="Τηλέφωνο" placeholder="Τηλέφωνο">
-  <input type="email" name="Email" placeholder="Email">
-  <input type="text" name="Διεύθυνση" placeholder="Διεύθυνση">
-  <input type="text" name="Πόλη" placeholder="Πόλη">
-  <input type="text" name="Νομός" placeholder="Νομός">
-  <input type="text" name="Επάγγελμα" placeholder="Επάγγελμα">
-  <input type="text" name="Χώρος_Εργασίας" placeholder="Χώρος Εργασίας">
-  <input type="date" name="Ημερομηνία_Γέννησης" placeholder="Ημερομηνία Γέννησης">
-  <input type="text" name="Οικογενειακή_Κατασταση" placeholder="Οικογενειακή Κατάσταση">
-  <input type="number" name="Τέκνα" placeholder="Τέκνα">
-  <input type="text" name="ΑΜΚΑ" placeholder="ΑΜΚΑ">
-  <input type="text" name="ΑΦΜ" placeholder="ΑΦΜ">
-  <input type="text" name="ΑΔΤ" placeholder="ΑΔΤ">
-  <input type="text" name="Εκδοση" placeholder="Έκδοση">
-  <textarea name="Παρατηρήσεις" placeholder="Παρατηρήσεις"></textarea>
-  <button type="submit">Καταχώρηση</button>
-</form>
+  <script>
+    const form = document.getElementById("memberForm");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
 
-<script>
-document.getElementById('memberForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  var formData = {};
-  Array.from(this.elements).forEach(function(el) {
-    if(el.name) formData[el.name] = el.value;
-  });
-
-  fetch('https://script.google.com/macros/s/AKfycbyAXobK3jSy1Qrg-2hVKoOOuwYE2tzl8l5Al146zoEpOiCaYYPT-ONK4HYJ_kOr8-tKXg/exec', {   // Βάλε εδώ το URL του Web App
-    method: 'POST',
-    body: JSON.stringify(formData)
-  })
-  .then(res => res.json())
-  .then(data => {
-    if(data.status === "success") {
-      alert("Η εγγραφή καταχωρήθηκε!");
-      document.getElementById('memberForm').reset();
-    } else alert("Σφάλμα!");
-  })
-  .catch(err => alert("Σφάλμα σύνδεσης!"));
-});
-</script>
+      fetch("ΤΟ_URL_ΤΟΥ_WEB_APP", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          Επίθετο: document.getElementById("Επίθετο").value,
+          Όνομα: document.getElementById("Όνομα").value,
+          Πατρός: document.getElementById("Πατρός").value,
+          Τηλέφωνο: document.getElementById("Τηλέφωνο").value,
+          Email: document.getElementById("Email").value,
+          Διεύθυνση: document.getElementById("Διεύθυνση").value,
+          Πόλη: document.getElementById("Πόλη").value,
+          Νομός: document.getElementById("Νομός").value,
+          Επάγγελμα: document.getElementById("Επάγγελμα").value,
+          Χώρος_Εργασίας: document.getElementById("Χώρος_Εργασίας").value
+          Ημερομηνία_Γέννησης: document.getElementById("Ημερομηνία_Γέννησης").value,
+          Οικογενειακή_Κατασταση: document.getElementById("Οικογενειακή_Κατασταση").value,
+          Τέκνα: document.getElementById("Τέκνα").value,
+          AMKA: document.getElementById("AMKA").value,
+          ΑΦΜ: document.getElementById("ΑΦΜ").value,
+          ΑΔΤ: document.getElementById("ΑΔΤ").value,
+          Εκδοση: document.getElementById("Εκδοση").value,
+          Παρατηρήσεις: document.getElementById("Παρατηρήσεις").value
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.status === "success") {
+          alert("Η εγγραφή ολοκληρώθηκε!");
+          form.reset();
+        } else {
+          alert("Σφάλμα: " + (data.message || "Δεν ήταν δυνατή η καταχώρηση"));
+        }
+      })
+      .catch(err => alert("Σφάλμα σύνδεσης: " + err));
+    });
+  </script>
 
 </body>
 </html>
-
 
