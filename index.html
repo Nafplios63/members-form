@@ -45,7 +45,7 @@ document.getElementById('memberForm').addEventListener('submit', function(e) {
     if(el.name) formData[el.name] = el.value;
   });
 
-  fetch('https://script.google.com/macros/s/AKfycbxGsB8zAmpG16DCs-bGFzxTctLcQkgcyqbfGSVqLg2Jm4zLlnFWouQSUp-z08W9uXkONw/exec', {   // Βάλε εδώ το URL του Web App
+  fetch('https://script.google.com/macros/s/AKfycbyAXobK3jSy1Qrg-2hVKoOOuwYE2tzl8l5Al146zoEpOiCaYYPT-ONK4HYJ_kOr8-tKXg/exec', {   // Βάλε εδώ το URL του Web App
     method: 'POST',
     body: JSON.stringify(formData)
   })
@@ -62,4 +62,5 @@ document.getElementById('memberForm').addEventListener('submit', function(e) {
 
 </body>
 </html>
+
 
